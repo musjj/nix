@@ -56,20 +56,6 @@ in
     ];
 
   config = lib.mkIf enable {
-    assertions = [
-      {
-        assertion = lib.elem config.qt.style.name [
-          "kvantum"
-          "Kvantum"
-        ];
-        message = ''`qt.style.name` must be `"kvantum"` to use `qt.style.catppuccin`'';
-      }
-      {
-        assertion = lib.elem (config.qt.platformTheme.name or null) [ "kvantum" ];
-        message = ''`qt.platformTheme.name` must be set to `"kvantum"` to use `qt.style.catppuccin`'';
-      }
-    ];
-
     xdg.configFile = {
       "Kvantum/${themeName}".source = "${config.catppuccin.sources.kvantum}/share/Kvantum/${themeName}";
       "Kvantum/kvantum.kvconfig" = lib.mkIf cfg.apply {
